@@ -21,3 +21,4 @@ System:
    npm    : 6.4.1
    OS     : Windows 10
 
+![alt text](angular-ionic-demo-countrypicker/Screenshot_2018-11-14 Ionic App.png)
