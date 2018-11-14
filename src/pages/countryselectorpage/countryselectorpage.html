@@ -1,0 +1,41 @@
+<!--
+  Generated template for the CountryselectorpagePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+   
+  <ion-navbar>
+      <ion-buttons>
+          <button icon-only (click)="dismissmodal()">
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title text-center>Select Country</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-searchbar
+  [(ngModel)]="usersearch"
+  [showCancelButton]="true"
+  (ionInput)="onInput($event)"
+  (ionCancel)="onCancel($event)">
+</ion-searchbar>
+
+    <ion-list  >
+        <ion-item *ngFor="let singleitem of allcountries_search" (click)="countrypicked(singleitem)">
+          
+          <ion-label>
+            <h2>{{singleitem.country}}</h2>
+            <h3>{{singleitem.calling_code}}</h3>
+            <!-- <p>Listen, I've had a pretty messed up day...</p> -->
+          </ion-label>    
+        </ion-item>
+      </ion-list>
+
+      
+</ion-content>
