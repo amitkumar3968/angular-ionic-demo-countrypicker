@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {HttpClient} from '@angular/common/http';
 import {  ViewController } from 'ionic-angular';
 
+import { File } from '@ionic-native/file';
+
 /**
  * Generated class for the CountryselectorpagePage page.
  *
@@ -20,7 +22,8 @@ export class CountryselectorpagePage  implements OnInit {
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
     public http: HttpClient,
-    public viewCtrl: ViewController
+    public viewCtrl: ViewController,
+    private file: File
     ) {
   }
   ngOnInit(){
@@ -38,6 +41,10 @@ export class CountryselectorpagePage  implements OnInit {
       //   this.questions.push(newQuestion)
       // }
     })
+          alert(this.file.dataDirectory);
+    this.file.checkDir(this.file.dataDirectory, 'mydir')
+    .then(_ => console.log('Directory exists'))
+    .catch(err => console.log('Directory doesn\'t exist'));
 
   }
 

@@ -14,6 +14,7 @@ import {InputpagePage} from '../pages/inputpage/inputpage';
 import {ToastpagePage} from '../pages/toastpage/toastpage';
 import {CountryselectorpagePage} from '../pages/countryselectorpage/countryselectorpage';
 import {HttpClientModule} from '@angular/common/http';
+import {File} from '@ionic-native/file';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import {HttpClientModule} from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
+    File,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
