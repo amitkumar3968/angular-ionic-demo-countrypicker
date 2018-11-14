@@ -21,4 +21,4 @@ System:
    npm    : 6.4.1
    OS     : Windows 10
 
-![alt text](angular-ionic-demo-countrypicker/Screenshot_2018-11-14 Ionic App.png?raw=true "Title")
+![alt text](https://raw.githubusercontent.com/amitkumar3968/angular-ionic-demo-countrypicker/master/Screenshot_2018-11-14%20Ionic%20App.png)
