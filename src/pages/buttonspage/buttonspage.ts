@@ -77,29 +77,35 @@ export class ButtonspagePage {
 //  var directoryToCreate   = 'testdir_ionic';
   // Make sure to change this to the directory name
 
-  if(this.plt.is('ios')){
+  if(this.plt.is('ios')|| this.plt.is('android')){
  // on ios device
- this.file.dataDirectory;
+//  this.file.dataDirectory;
+
+ this.file.writeFile(this.file.dataDirectory, 'test.csv', 'hello,world,', {replace: true}).then( () => {
+  this.showtoast('file written');
+  console.log(this.file.dataDirectory);
+}
+)
+.catch( (err) => {
+ console.error(err);
+}
+
+)
+;
+this.file.readAsText(this.file.dataDirectory,'test.csv').then(
+(data) => {
+this.showtoast(data);
+console.log(data);
+}
+);
+
   }
 
-  if(this.plt.is('android')){
-    // on android device
-    this.file.dataDirectory;
-     }
+   
      
-     this.file.writeFile(this.file.dataDirectory, 'test.csv', 'hello,world,', {replace: true}).then( () => {
-       this.showtoast('file written');
-       console.log(this.file.dataDirectory);
-     }
-     )
-     .catch( (err) => {
-      console.error(err);
-     }
+    
 
-     )
-     ;
-  
-  }
+}
 
   selectcountry(){
     let profileModal = this.modalCtrl.create(CountryselectorpagePage );
