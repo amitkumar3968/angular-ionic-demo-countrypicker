@@ -3,8 +3,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import {CountryselectorpagePage} from '../countryselectorpage/countryselectorpage';
- 
 
+import { File } from '@ionic-native/file';
+import { Platform } from 'ionic-angular';
+
+// declare let cordova: any;
 /**
  * Generated class for the ButtonspagePage page.
  *
@@ -22,9 +25,21 @@ export class ButtonspagePage {
   constructor(public navCtrl: NavController,
      public navParams: NavParams, 
     private toastCtrl: ToastController,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public plt: Platform,
+    private file: File
     ) {
+      
 
+      this.plt.ready().then((readySource) => {
+        console.log('Platform ready from', readySource);
+        // Platform now ready, execute any required native code
+        console.log(this.plt.platforms());
+       // alert(this.plt.platforms());
+       this.showtoast(this.plt.platforms());
+      });
+
+      
   }
 
   ionViewDidLoad() {
@@ -42,24 +57,48 @@ export class ButtonspagePage {
 
   loginsubmitaction(){
 
-    if(!this.checkboxstatus){
-      this.showtoast('Please Accept conditions.');
-      return;
-    }
-    if (!this.ValidateEmail(this.email)){
-      this.showtoast('Please Enter Valid Email.');
-      return;
-    } 
+    // if(!this.checkboxstatus){
+    //   this.showtoast('Please Accept conditions.');
+    //   return;
+    // }
+    // if (!this.ValidateEmail(this.email)){
+    //   this.showtoast('Please Enter Valid Email.');
+    //   return;
+    // } 
 
-    if(this.userpassword.length <= 4){
-      this.showtoast('Password should be greater than 4 Characters.');
-      return;
-    }
+    // if(this.userpassword.length <= 4){
+    //   this.showtoast('Password should be greater than 4 Characters.');
+    //   return;
+    // }
 
     // go for login service.
  // send to next screen.
+//  var parentDirectory     = cordova.file.externalRootDirectory;
+//  var directoryToCreate   = 'testdir_ionic';
+  // Make sure to change this to the directory name
 
+  if(this.plt.is('ios')){
+ // on ios device
+ this.file.dataDirectory;
+  }
 
+  if(this.plt.is('android')){
+    // on android device
+    this.file.dataDirectory;
+     }
+     
+     this.file.writeFile(this.file.dataDirectory, 'test.csv', 'hello,world,', {replace: true}).then( () => {
+       this.showtoast('file written');
+       console.log(this.file.dataDirectory);
+     }
+     )
+     .catch( (err) => {
+      console.error(err);
+     }
+
+     )
+     ;
+  
   }
 
   selectcountry(){
