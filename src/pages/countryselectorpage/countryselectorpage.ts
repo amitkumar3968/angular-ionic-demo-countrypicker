@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {HttpClient} from '@angular/common/http';
 import {  ViewController } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 
 import { File } from '@ionic-native/file';
 
@@ -23,7 +24,8 @@ export class CountryselectorpagePage  implements OnInit {
      public navParams: NavParams,
     public http: HttpClient,
     public viewCtrl: ViewController,
-    private file: File
+    private file: File,
+    public loadingCtrl: LoadingController
     ) {
   }
   ngOnInit(){
@@ -35,23 +37,29 @@ export class CountryselectorpagePage  implements OnInit {
       console.log(data)
        this.allcountries = data;
        this.allcountries_search = data;
+       this.hideloader();
 
       // for (let dataIndex=0; dataIndex<data.length; dataIndex++) { 
       //   let newQuestion = new OralQuestion(data[dataIndex].module, data[dataIndex].section, data[dataIndex].questionText, data[dataIndex].answerText)
       //   this.questions.push(newQuestion)
       // }
     })
-          alert(this.file.applicationDirectory);
+          // alert(this.file.applicationDirectory);
     this.file.checkDir(this.file.dataDirectory, 'mydir')
     .then(_ => console.log('Directory exists'))
     .catch(err => console.log('Directory doesn\'t exist'));
 
+   this.presentLoading();
+
   }
+
+  
 
   allcountries:any ;
   allcountries_search:any ;
   userpickedcountry;
   usersearch ;
+  loader;
   ionViewDidLoad() {
     console.log('ionViewDidLoad CountryselectorpagePage');
 
@@ -89,5 +97,17 @@ export class CountryselectorpagePage  implements OnInit {
   onCancel($event){
     this.allcountries_search = this.allcountries;
   }
+
+
+  presentLoading() {
+    this.loader = this.loadingCtrl.create({
+     content: "Please wait..."
+   });
+   this.loader.present();
+ }
+ hideloader(){
+   this.loader.dismissAll();
+   // this.loadingCtrl.dismissAll();
+ }
 
 }
